@@ -1,0 +1,70 @@
+defaultTasks 'clean', 'test', 'aggregate'
+
+apply plugin: 'java'
+apply plugin: 'idea'
+apply plugin: 'eclipse'
+apply plugin: 'net.serenity-bdd.aggregator'
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+
+group 'co.com.tuya.certificacion'
+version '1.0-SNAPSHOT'
+
+repositories {
+    mavenCentral()
+}
+
+buildscript {
+    repositories {
+        jcenter()
+        mavenCentral()
+    }
+    ext{
+        serenityVersion = "2.3.13"
+        serenityGradleVersion = "2.3.13"
+        serenityCucumberVersion = "2.2.6"
+    }
+    dependencies {
+        classpath("net.serenity-bdd:serenity-gradle-plugin:$rootProject.ext.serenityGradleVersion")
+    }
+}
+
+configurations.all {
+    resolutionStrategy {
+        force "io.cucumber:cucumber-core:5.0.0"
+    }
+}
+
+dependencies {
+    implementation  group: 'org.slf4j', name: 'slf4j-simple', version: '2.0.0-alpha1'
+    implementation  group: 'org.hamcrest', name: 'hamcrest', version: '2.2'
+
+    implementation "net.serenity-bdd:serenity-core:$rootProject.ext.serenityVersion",
+            "net.serenity-bdd:serenity-junit:$rootProject.ext.serenityVersion",
+            "net.serenity-bdd:serenity-screenplay:$rootProject.ext.serenityVersion",
+            "net.serenity-bdd:serenity-screenplay-webdriver:$rootProject.ext.serenityVersion",
+            "net.serenity-bdd:serenity-screenplay-rest:$rootProject.ext.serenityVersion"
+
+    testImplementation group: 'com.microsoft.azure', name: 'azure-client-authentication', version: '1.7.1'
+    implementation group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '8.2.0.jre8'
+
+    testImplementation "net.serenity-bdd:serenity-cucumber5:$rootProject.ext.serenityCucumberVersion",
+            "junit:junit:4.12",
+            "org.assertj:assertj-core:3.8.0"
+    implementation 'junit:junit:4.12'
+}
+
+test {
+    systemProperties System.getProperties()
+    systemProperty "file.encoding", "UTF-8"
+    systemProperty "feature.file.encoding", "UTF-8"
+    systemProperty "cucumber.options", System.properties.getProperty("cucumber.options")
+    System.properties.setProperty('http.proxyHost', '10.169.104.166')
+    System.properties.setProperty('http.proxyPort', '8080')
+    testLogging.showStandardStreams = true
+    finalizedBy(aggregate)
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding('UTF-8')
+}
