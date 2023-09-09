@@ -20,8 +20,8 @@ buildscript {
         mavenCentral()
     }
     ext{
-        serenityVersion = "2.3.13"
-        serenityGradleVersion = "2.3.13"
+        serenityVersion = "2.2.6"
+        serenityGradleVersion = "2.2.6"
         serenityCucumberVersion = "2.2.6"
     }
     dependencies {

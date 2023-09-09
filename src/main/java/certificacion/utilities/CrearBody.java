@@ -24,34 +24,15 @@ public class CrearBody<Int> {
         return new CrearBody(plantilla);
     }
 
-    /*public String yLosValores(List<Usuario> values) {
-        String nuevaPlantilla = parseJson(plantillaRuta);
-        nuevaPlantilla = getString(values.get(0).getEmail(), nuevaPlantilla, EMAIL_VALOR.getMsj());
-        nuevaPlantilla = getString(values.get(0).getPassword(), nuevaPlantilla, PASSWORD_VALOR.getMsj());
-        nuevaPlantilla = getString(String.valueOf(values.get(0).getUser_id()), nuevaPlantilla, USER_ID.getMsj());
-        nuevaPlantilla = getString(values.get(0).getUsername(), nuevaPlantilla, USERNAME_VALOR.getMsj());
-        mensaje().log(Level.INFO, REQUEST_BODY.getMsj(), nuevaPlantilla);
-        return nuevaPlantilla;
-    }*/
-
     public String yLosValores(List<Usuario> values) {
         String nuevaPlantilla = parseJson(plantillaRuta);
         nuevaPlantilla = nuevaPlantilla.replace(EMAIL.getMsj(), values.get(0).getEmail());
         nuevaPlantilla = nuevaPlantilla.replace(PASSWORD.getMsj(), values.get(0).getPassword());
-        nuevaPlantilla = nuevaPlantilla.replace("\""+USER_ID.getMsj()+"\"", String.valueOf(values.get(0).getUser_id()));
+        nuevaPlantilla = nuevaPlantilla.replace(USER_ID.getMsj(), String.valueOf(values.get(0).getUser_id()));
         nuevaPlantilla = nuevaPlantilla.replace(USERNAME.getMsj(),values.get(0).getUsername());
         mensaje().log(Level.INFO, REQUEST_BODY.getMsj(), nuevaPlantilla);
         return nuevaPlantilla;
     }
-
- /*   private String getString(String values, String nuevaPlantilla, String k) {
-        String key = "${" + k + "}";
-        nuevaPlantilla = nuevaPlantilla.replace(key, values);
-        mensaje().log(Level.SEVERE, REQUEST_BODY.getMsj(), nuevaPlantilla);
-        return nuevaPlantilla;
-    }*/
-
-
     private String parseJson(String ruta) {
         String resultStr = "";
         resultStr = readFileAsString(ruta);

@@ -30,7 +30,7 @@ public class CrearUsuario implements Task{
                 .with(requestSpecification -> requestSpecification.headers(Obtener.valorCabecera())
                         .body(CrearBody.conLaPlantilla(RUTA_BODY_REGISTRO.getMsj())
                                 .yLosValores(body)).relaxedHTTPSValidation()));
-
+        Serenity.setSessionVariable(RESPONSE.getMsj()).to(SerenityRest.lastResponse().body());
         mensaje().info(RESPONSE.getMsj());
         SerenityRest.lastResponse().body().prettyPrint();
     }

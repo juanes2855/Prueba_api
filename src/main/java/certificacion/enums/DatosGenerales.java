@@ -11,7 +11,7 @@ public enum DatosGenerales {
     RUTA_BODY_REGISTRO("src/test/resources/Data/registro.json"),
     TRANSACTION_ID("\\$\\{" + "transactionId" + "}"),
     TRANSACTION_ID_VALOR("transactionId"),
-    USER_ID("${user_id}"),
+    USER_ID("\""+"${user_id}"+"\""),
     EMAIL("${email}"),
     PASSWORD("${password}"),
     USERNAME("${username}"),

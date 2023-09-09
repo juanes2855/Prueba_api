@@ -6,10 +6,9 @@ import java.util.Map;
 public enum EndPoint {
     PERMISO("token", "/oauth/v2.0/token"),
     CREAR_USUARIO("crear", "/users"),
+    CONSULTAR_USUARIO("consultar", "/users/"),
     PERMISO_SOY_YO("endPoint", "/oauth2/token"),
-    PERMISO_EMBAJADOR_VALIDAR("validar", "validateUser"),
-
-    PERMISO_EMBAJADOR_CONSULTAR_TRANSACCION("consultar", "GetTransaction");
+    PERMISO_EMBAJADOR_VALIDAR("validar", "validateUser");
     private final String llave;
     private final String valor;
     private static Map<String, String> uri;
