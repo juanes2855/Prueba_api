@@ -8,18 +8,11 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.List;
 import java.util.logging.Level;
-import static certificacion.enums.DatosGenerales.RUTA_BODY_REGISTRO;
-import static certificacion.enums.DatosGenerales.TRANSACTION_ID;
-import static certificacion.enums.DatosGenerales.TRANSACTION_ID_VALOR;
-import static certificacion.enums.DatosGenerales.USER_ID;
-import static certificacion.enums.DatosGenerales.TRANSACTION_CHANNEL_VALOR;
-import static certificacion.enums.DatosGenerales.EMAIL_VALOR;
-import static certificacion.enums.DatosGenerales.PASSWORD_VALOR;
-import static certificacion.enums.DatosGenerales.REQUEST_BODY;
 
+import static certificacion.enums.DatosGenerales.*;
 import static certificacion.utilities.ObtenerLogger.mensaje;
 
-public class CrearBody {
+public class CrearBody<Int> {
     private final String plantillaRuta;
     public CrearBody(String plantillaRuta) {
         this.plantillaRuta = plantillaRuta;
@@ -31,16 +24,21 @@ public class CrearBody {
         String nuevaPlantilla = parseJson(plantillaRuta);
         nuevaPlantilla = getString(values.get(0).getEmail(), nuevaPlantilla, EMAIL_VALOR.getMsj());
         nuevaPlantilla = getString(values.get(0).getPassword(), nuevaPlantilla, PASSWORD_VALOR.getMsj());
-        nuevaPlantilla = getString(String.valueOf(values.get(0).getUser_id()), nuevaPlantilla, USER_ID.getMsj());
-        nuevaPlantilla = getString(values.get(0).getUsername(), nuevaPlantilla, PASSWORD_VALOR.getMsj());
+        nuevaPlantilla = getString(String.valueOf(values.get(0).getUser_id()), nuevaPlantilla, USER_ID.getMsj());;
+        nuevaPlantilla = getString(values.get(0).getUsername(), nuevaPlantilla, USERNAME_VALOR.getMsj());
         mensaje().log(Level.INFO, REQUEST_BODY.getMsj(), nuevaPlantilla);
         return nuevaPlantilla;
     }
     private String getString(String values, String nuevaPlantilla, String k) {
         String key = "${" + k + "}";
+        System.out.println(values + " " + k);
         nuevaPlantilla = nuevaPlantilla.replace(key, values);
         return nuevaPlantilla;
     }
+
+
+
+
     private String parseJson(String ruta) {
         String resultStr = "";
         resultStr = readFileAsString(ruta);

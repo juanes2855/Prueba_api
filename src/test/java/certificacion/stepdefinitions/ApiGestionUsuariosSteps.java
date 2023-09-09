@@ -28,7 +28,6 @@ public class ApiGestionUsuariosSteps {
         RestAssured.baseURI = urlBase;
         request = RestAssured.given();
     }
-
     @Cuando("envío una solicitud POST a {string} con JSON:")
     public void envioUnaSolicitudPOSTAConJSON(String endpoint, List<Usuario> body) {
         theActorInTheSpotlight().attemptsTo(CrearUsuario.conLosDatos(body, endpoint));

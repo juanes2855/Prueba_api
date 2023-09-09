@@ -11,9 +11,7 @@ import net.serenitybdd.screenplay.rest.interactions.Post;
 import net.serenitybdd.screenplay.rest.questions.LastResponse;
 import net.serenitybdd.core.Serenity;
 import java.util.List;
-import static certificacion.enums.ConfiguracionAmbiente.CONSTANT_ENV;
 import static certificacion.enums.DatosGenerales.*;
-import static certificacion.utilities.Obtener.transactionChannelId;
 import static certificacion.utilities.ObtenerLogger.mensaje;
 public class CrearUsuario implements Task{
 
@@ -29,10 +27,10 @@ public class CrearUsuario implements Task{
     public <T extends Actor> void performAs(T actor) {
         endPoint = EndPoint.obtenerUri(endPoint);
         actor.attemptsTo(Post.to(endPoint)
-                .with(requestSpecification -> requestSpecification.headers(Obtener.valorCabecera(System.getProperty(CONSTANT_ENV.getMsj())))
-                        .body(CrearBody.conLaPlantilla(RUTA_BODY.getMsj())
+                .with(requestSpecification -> requestSpecification.headers(Obtener.valorCabecera())
+                        .body(CrearBody.conLaPlantilla(RUTA_BODY_REGISTRO.getMsj())
                                 .yLosValores(body)).relaxedHTTPSValidation()));
-        Serenity.setSessionVariable(TRANSACTION_ID_VALOR.getMsj()).to(LastResponse.received().answeredBy(actor).jsonPath().getString(DATA_TRANSACTION_ID.getMsj()));
+
         mensaje().info(RESPONSE.getMsj());
         SerenityRest.lastResponse().body().prettyPrint();
     }

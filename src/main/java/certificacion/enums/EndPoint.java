@@ -5,10 +5,10 @@ import java.util.Map;
 
 public enum EndPoint {
     PERMISO("token", "/oauth/v2.0/token"),
-    CREAR_USUARIO("crear", "/users"),
+    CREAR_USUARIO("crear", "http://localhost:8080/users"),
     PERMISO_SOY_YO("endPoint", "/oauth2/token"),
     PERMISO_EMBAJADOR_VALIDAR("validar", "validateUser"),
-    PERMISO_EMBAJADOR_TRANSACCION("crear", "UnifiedTransaction"),
+
     PERMISO_EMBAJADOR_CONSULTAR_TRANSACCION("consultar", "GetTransaction");
     private final String llave;
     private final String valor;
