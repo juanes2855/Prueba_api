@@ -3,6 +3,7 @@ package certificacion.enums;
 
 public enum ConfiguracionAmbiente {
 
+    BASE_URL("http://localhost:8080"),
     CONTENT_TYPE("Content-Type"),
     CONTENT_TYPE_JSON("application/json");
     String msj;

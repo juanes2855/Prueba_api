@@ -1,18 +1,20 @@
 package certificacion.stepdefinitions;
+
 import certificacion.exceptions.ExcepcionGeneral;
 import certificacion.models.Usuario;
 import certificacion.questions.ObtenerRespuesta;
 import certificacion.tasks.CrearUsuario;
-import io.cucumber.java.es.*;
-import io.restassured.RestAssured;
+import io.cucumber.java.es.Cuando;
+import io.cucumber.java.es.Entonces;
 import io.restassured.response.Response;
 import io.restassured.specification.RequestSpecification;
 import net.serenitybdd.screenplay.GivenWhenThen;
+import net.serenitybdd.screenplay.rest.abilities.CallAnApi;
 import org.hamcrest.Matchers;
-import org.junit.Assert;
 
 import java.util.List;
 
+import static certificacion.enums.ConfiguracionAmbiente.BASE_URL;
 import static certificacion.enums.DatosGenerales.BODY;
 import static certificacion.enums.Mensajes.CONST_CREAR_USUARIO;
 import static certificacion.enums.Mensajes.MENSAJE_ERROR_CODIGO;
@@ -23,23 +25,17 @@ public class ApiGestionUsuariosSteps {
     private RequestSpecification request;
     private Response response;
 
-    @Dado("que la URL base es {string}")
-    public void queLaURLBaseEs(String urlBase) {
-        RestAssured.baseURI = urlBase;
-        request = RestAssured.given();
-    }
     @Cuando("envío una solicitud POST a {string} con JSON:")
     public void envioUnaSolicitudPOSTAConJSON(String endpoint, List<Usuario> body) {
+        theActorInTheSpotlight().whoCan(CallAnApi.at(BASE_URL.getMsj()));
         theActorInTheSpotlight().attemptsTo(CrearUsuario.conLosDatos(body, endpoint));
-        theActorInTheSpotlight().should(GivenWhenThen.seeThat(
-                ObtenerRespuesta.codigo(), Matchers.equalTo(Integer.parseInt(CONST_CREAR_USUARIO.getMsj()))).orComplainWith(ExcepcionGeneral.class, MENSAJE_ERROR_CODIGO.getMsj()));
-        theActorInTheSpotlight().remember(BODY.getMsj(),body);
-
     }
 
     @Entonces("el código de estado de respuesta debe ser {int}")
     public void elCodigoDeEstadoDeRespuestaDebeSer(int statusCode) {
-        response.then().statusCode(statusCode);
+        System.out.println("--------------------+" + statusCode);
+        theActorInTheSpotlight().should(GivenWhenThen.seeThat(
+                ObtenerRespuesta.codigo(), Matchers.equalTo(statusCode)).orComplainWith(ExcepcionGeneral.class, MENSAJE_ERROR_CODIGO.getMsj()));
     }
 
     @Entonces("la respuesta debe ser un objeto JSON")

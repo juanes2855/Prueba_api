@@ -45,13 +45,15 @@ dependencies {
             "net.serenity-bdd:serenity-screenplay-webdriver:$rootProject.ext.serenityVersion",
             "net.serenity-bdd:serenity-screenplay-rest:$rootProject.ext.serenityVersion"
 
-    testImplementation group: 'com.microsoft.azure', name: 'azure-client-authentication', version: '1.7.1'
-    implementation group: 'com.microsoft.sqlserver', name: 'mssql-jdbc', version: '8.2.0.jre8'
+    implementation group: 'net.sf.jt400', name: 'jt400', version: '8.5'
+    implementation group: 'org.apache.poi', name: 'poi', version: '5.2.3'
+    implementation group: 'org.apache.poi', name: 'poi-ooxml', version: '5.2.3'
+
+
 
     testImplementation "net.serenity-bdd:serenity-cucumber5:$rootProject.ext.serenityCucumberVersion",
             "junit:junit:4.12",
             "org.assertj:assertj-core:3.8.0"
-    implementation 'junit:junit:4.12'
 }
 
 test {

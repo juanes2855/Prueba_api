@@ -5,7 +5,7 @@ import java.util.Map;
 
 public enum EndPoint {
     PERMISO("token", "/oauth/v2.0/token"),
-    CREAR_USUARIO("crear", "http://localhost:8080/users"),
+    CREAR_USUARIO("crear", "/users"),
     PERMISO_SOY_YO("endPoint", "/oauth2/token"),
     PERMISO_EMBAJADOR_VALIDAR("validar", "validateUser"),
 
