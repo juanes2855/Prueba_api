@@ -9,6 +9,7 @@ public enum DatosGenerales {
 
     IDENTIFICATION_NUMBER("identificationNumber"),
     RUTA_BODY_REGISTRO("src/test/resources/Data/registro.json"),
+    RUTA_BODY_INICIO("src/test/resources/Data/inicioSesion.json"),
     TRANSACTION_ID("\\$\\{" + "transactionId" + "}"),
     TRANSACTION_ID_VALOR("transactionId"),
     USER_ID("\""+"${user_id}"+"\""),
@@ -17,6 +18,7 @@ public enum DatosGenerales {
     USERNAME("${username}"),
     EMAIL_VALOR("email"),
     PASSWORD_VALOR("password"),
+    INICIAR_SESION("iniciar"),
     USERNAME_VALOR("username"),
     USER_ID_VALOR("user_id"),
     DATA_TRANSACTION_ID("transactionId"),

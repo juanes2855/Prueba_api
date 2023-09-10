@@ -1,6 +1,9 @@
 #language: es
 
 Característica: API de Autenticación
+  Yo como estudiante de Microservicios
+  Necesito automatizar el servicio ApiGestionUsuarios
+  Para tener realizar pruebas a sus EndPoints
 
   @ServiciosRest
   Esquema del escenario: Crear un nuevo usuario exitosamente
@@ -33,9 +36,51 @@ Característica: API de Autenticación
     Y la respuesta debe ser un objeto JSON
 
     Y el objeto JSON debe tener las propiedades:
-      | user_id   |  <user_id> |
-      | username  | <username> |
+      | user_id  | <user_id>  |
+      | username | <username> |
 
     Ejemplos:
       | user_id | username |
       | 21      | hectorL  |
+
+
+  @ServiciosRest
+  Esquema del escenario: Ver Usuarios exitosamente
+
+    Dado me conecto a la api
+
+    Cuando envío una solicitud GET para "listar" "page=" <page> "&per_page=" <per_page>
+
+    Entonces el código de estado de respuesta debe ser 200
+
+    Y la respuesta debe ser un arreglo JSON
+
+    Y el arreglo JSON debe tener al menos 1 elemento
+
+    Y cada elemento en el arreglo JSON debe tener las propiedades:
+      | user_id  | <user_id>  |
+      | username | <username> |
+      | email    | <email>    |
+
+    Ejemplos:
+      | user_id | username | email               | page | per_page |
+      | 1       | johndoe  | johndoe@example.com | 1    | 10       |
+
+
+  @ServiciosRest
+  Esquema del escenario: Iniciar sesión a un usuario exitosamente
+
+    Dado me conecto a la api
+
+    Cuando envío una solicitud POST para "iniciar" con JSON:
+      | username | <username> |
+      | password | <password> |
+
+    Entonces el código de estado de respuesta debe ser 200
+    Y la respuesta debe ser un objeto JSON
+    #Y el objeto JSON debe tener las propiedades:
+    #  | token | <token> |
+
+    Ejemplos:
+      | password | username | token  |
+      | P@ssw0rd | hectorL  | token1 |

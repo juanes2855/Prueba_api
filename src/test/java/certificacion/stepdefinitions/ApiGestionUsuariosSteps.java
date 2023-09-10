@@ -1,10 +1,13 @@
 package certificacion.stepdefinitions;
 
+import certificacion.enums.EndPoint;
 import certificacion.exceptions.ExcepcionGeneral;
 import certificacion.models.Usuario;
 import certificacion.questions.ObtenerRespuesta;
 import certificacion.tasks.ConsultarUsuario;
 import certificacion.tasks.CrearUsuario;
+import certificacion.tasks.IniciarSesion;
+import certificacion.tasks.ListarUsuarios;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Dado;
@@ -81,4 +84,30 @@ public class ApiGestionUsuariosSteps {
             Assert.assertEquals("Valor incorrecto para la propiedad " + propertyName, expectedValue, actualValue);
         }
     }
+    @Cuando("envío una solicitud POST para {string} con JSON:")
+    public void envíoUnaSolicitudPOSTParaConJSON(String endPoint, DataTable body) {
+        theActorInTheSpotlight().attemptsTo(IniciarSesion.conLosDatos(body, endPoint));
+    }
+
+    @Cuando("envío una solicitud GET para {string} {string} {int} {string} {int}")
+    public void envíoUnaSolicitudGETPara(String endPoint, String page, Integer pageValue, String perPage, Integer perPageValue) {
+        theActorInTheSpotlight().attemptsTo(ListarUsuarios.conLosDatos(endPoint, page,pageValue,perPage,perPageValue));
+    }
+
+    @Entonces("la respuesta debe ser un arreglo JSON")
+    public void laRespuestaDebeSerUnArregloJSON() {
+
+    }
+
+    @Entonces("el arreglo JSON debe tener al menos {int} elemento")
+    public void elArregloJSONDebeTenerAlMenosElemento(Integer int1) {
+
+    }
+
+    @Entonces("cada elemento en el arreglo JSON debe tener las propiedades:")
+    public void cadaElementoEnElArregloJSONDebeTenerLasPropiedades(io.cucumber.datatable.DataTable dataTable) {
+
+    }
+
+
 }

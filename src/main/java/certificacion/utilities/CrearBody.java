@@ -33,6 +33,14 @@ public class CrearBody<Int> {
         mensaje().log(Level.INFO, REQUEST_BODY.getMsj(), nuevaPlantilla);
         return nuevaPlantilla;
     }
+    public String yLosValores(List<String> values , String endPoint) {
+        String nuevaPlantilla = parseJson(plantillaRuta);
+        nuevaPlantilla = nuevaPlantilla.replace(USERNAME.getMsj(),values.get(1));
+        nuevaPlantilla = nuevaPlantilla.replace(PASSWORD.getMsj(), values.get(3));
+
+        mensaje().log(Level.INFO, REQUEST_BODY.getMsj(), nuevaPlantilla);
+        return nuevaPlantilla;
+    }
     private String parseJson(String ruta) {
         String resultStr = "";
         resultStr = readFileAsString(ruta);
