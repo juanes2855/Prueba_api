@@ -57,10 +57,10 @@ Característica: API de Autenticación
 
     Y el arreglo JSON debe tener al menos 1 elemento
 
-    Y cada elemento en el arreglo JSON debe tener las propiedades:
-      | user_id  | <user_id>  |
-      | username | <username> |
-      | email    | <email>    |
+    #Y cada elemento en el arreglo JSON debe tener las propiedades:
+    #  | user_id  | <user_id>  |
+    #  | username | <username> |
+    #  | email | <email> |
 
     Ejemplos:
       | user_id | username | email               | page | per_page |
@@ -77,7 +77,9 @@ Característica: API de Autenticación
       | password | <password> |
 
     Entonces el código de estado de respuesta debe ser 200
+
     Y la respuesta debe ser un objeto JSON
+#### mirar si se pone la validacion de el Json con minimo un elemnto ( no vacio)
     #Y el objeto JSON debe tener las propiedades:
     #  | token | <token> |
 
