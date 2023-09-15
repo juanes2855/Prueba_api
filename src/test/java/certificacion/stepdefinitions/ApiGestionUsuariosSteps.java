@@ -59,6 +59,12 @@ public class ApiGestionUsuariosSteps {
     @Entonces("la respuesta debe ser un objeto JSON")
     public void laRespuestaDebeSerUnObjetoJSON() {
         response = Serenity.sessionVariableCalled(RESPONSE.getMsj());
+        Assert.assertTrue(response.getContentType().toLowerCase().contains("application/json"));
+    }
+
+    @Entonces("el JSON debe tener al menos un elemento")
+    public void elJSONDebeTenerAlMenosUnElemento() {
+        response = Serenity.sessionVariableCalled(RESPONSE.getMsj());
         response.then().body(Matchers.is(Matchers.notNullValue()));
     }
 
@@ -119,43 +125,11 @@ public class ApiGestionUsuariosSteps {
         JSONObject jsonResponse = new JSONObject(response.getBody().asString());
         // Convertir la respuesta en un arreglo JSON
         JSONArray jsonArray = jsonResponse.getJSONArray("users");
-
         // Verificar que el arreglo JSON tenga al menos un elemento
         Assert.assertTrue(jsonArray.length() > 0);
     }
 
-
-    /*@Entonces("cada elemento en el arreglo JSON debe tener las propiedades:")
-    public void cadaElementoEnElArregloJSONDebeTenerLasPropiedades(DataTable dataTable) {
-
-        response = Serenity.sessionVariableCalled(RESPONSE.getMsj());
-        JSONObject jsonResponse = new JSONObject(response.getBody().asString());
-        // Convertir la respuesta en un arreglo JSON
-        JSONArray jsonArray = jsonResponse.getJSONArray("users");
-
-        // Obtener la lista de mapas desde la DataTable
-        List<Map<String, String>> data = dataTable.asMaps();
-
-        // Iterar a través de cada elemento en el arreglo JSON
-        for (int i = 0; i < jsonArray.length(); i++) {
-            JSONObject jsonObject = jsonArray.getJSONObject(i);
-
-            System.out.println("-*-*-*+**-*-*-*-*-"+jsonObject);
-            Map<String, String> properties = dataTable.asMap(String.class, String.class);
-
-            // Verificar las propiedades de cada elemento
-            for (Map.Entry<String, String> row : properties.entrySet()) {
-                String propertyName = row.getKey();
-                String expectedValue = row.getValue();
-
-                System.out.println("-*-*-*+**-*-*-*-*-"+propertyName+" "+expectedValue);
-
-                Assert.assertEquals("Valor incorrecto para la propiedad " + propertyName,
-                        expectedValue, jsonObject.optString(propertyName));
-            }
-
-        }
-    }*/
-
-
+    @Cuando("envío una solicitud PUT a {string} {} con JSON:")
+    public void envioUnaSolicitudPUTAConJSON(String endPoint, String user_id , DataTable body) {
+    }
 }

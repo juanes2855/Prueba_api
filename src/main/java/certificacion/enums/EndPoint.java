@@ -7,6 +7,7 @@ public enum EndPoint {
     CREAR_USUARIO("crear", "/users"),
     CONSULTAR_USUARIO("consultar", "/users/"),
     LISTAR_USUARIOS("listar", "/users?"),
+    ACTUALIZAR_USUARIO("","/users/1")
     INICIAR_SESION("iniciar", "/tokens");
     private final String llave;
     private final String valor;

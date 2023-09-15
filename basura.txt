@@ -1,19 +1,4 @@
-  Esquema del escenario: Actualizar Datos del Usuario exitosamente
-    Cuando envío una solicitud PUT a "/users/1" con JSON:
-"""
-      {
-        "username": "nuevonombredeusuario",
-        "password": "nuevacontraseña",
-        "email": "nuevoemail@example.com"
-      }
-      """
-    Entonces el código de estado de respuesta debe ser 200
-    Y la respuesta debe ser un objeto JSON
-    Y el objeto JSON debe tener las propiedades:
-      | mensaje                          |
-      | Usuario actualizado exitosamente |
-
-  Esquema del escenario: Cambiar Contraseña exitosamente
+    Esquema del escenario: Cambiar Contraseña exitosamente
     Cuando envío una solicitud PATCH a "/users/1" con JSON:
 """
       {

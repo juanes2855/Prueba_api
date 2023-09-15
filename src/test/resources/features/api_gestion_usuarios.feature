@@ -57,14 +57,9 @@ Característica: API de Autenticación
 
     Y el arreglo JSON debe tener al menos 1 elemento
 
-    #Y cada elemento en el arreglo JSON debe tener las propiedades:
-    #  | user_id  | <user_id>  |
-    #  | username | <username> |
-    #  | email | <email> |
-
     Ejemplos:
-      | user_id | username | email               | page | per_page |
-      | 1       | johndoe  | johndoe@example.com | 1    | 10       |
+      | page | per_page |
+      | 1    | 10       |
 
 
   @ServiciosRest
@@ -79,10 +74,30 @@ Característica: API de Autenticación
     Entonces el código de estado de respuesta debe ser 200
 
     Y la respuesta debe ser un objeto JSON
-#### mirar si se pone la validacion de el Json con minimo un elemnto ( no vacio)
-    #Y el objeto JSON debe tener las propiedades:
-    #  | token | <token> |
+
+    Y el JSON debe tener al menos un elemento
 
     Ejemplos:
       | password | username | token  |
       | P@ssw0rd | hectorL  | token1 |
+
+
+  @ServiciosRest
+  Esquema del escenario: Actualizar Datos del Usuario exitosamente
+
+    Dado me conecto a la api
+
+    Cuando envío una solicitud PUT a "actualizar" <user_id> con JSON:
+      | username | <username> |
+      | password | <password> |
+      | email    | <email>    |
+
+    Entonces el código de estado de respuesta debe ser 200
+    Y la respuesta debe ser un objeto JSON
+    Y el objeto JSON debe tener las propiedades:
+      | mensaje                          |
+      | Usuario actualizado exitosamente |
+
+    Ejemplos:
+      | user_id | username | password | email               |
+      | 21      | hectorL  | P@ssw0rd | hectorl@example.com |
