@@ -1,25 +1,4 @@
-    Esquema del escenario: Cambiar Contraseña exitosamente
-    Cuando envío una solicitud PATCH a "/users/1" con JSON:
-"""
-      {
-        "new_password": "nuevacontraseña"
-      }
-      """
-    Entonces el código de estado de respuesta debe ser 200
-    Y la respuesta debe ser un objeto JSON
-    Y el objeto JSON debe tener las propiedades:
-      | mensaje                             |
-      | Contraseña actualizada exitosamente |
-
-  Esquema del escenario: Eliminar Usuario exitosamente
-    Cuando envío una solicitud DELETE a "/users/1"
-    Entonces el código de estado de respuesta debe ser 200
-    Y la respuesta debe ser un objeto JSON
-    Y el objeto JSON debe tener las propiedades:
-      | mensaje                        |
-      | Usuario eliminado exitosamente |
-
-  Esquema del escenario: Solicitud de recuperación de contraseña exitosamente
+Esquema del escenario: Solicitud de recuperación de contraseña exitosamente
     Cuando envío una solicitud POST a "/emails" con JSON:
 """
       {
@@ -31,3 +10,6 @@
     Y el objeto JSON debe tener las propiedades:
       | mensaje                                         |
       | Solicitud de recuperación de contraseña exitosa |
+
+
+

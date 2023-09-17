@@ -3,6 +3,9 @@ package certificacion.tasks;
 import certificacion.enums.EndPoint;
 import certificacion.utilities.CrearBody;
 import certificacion.utilities.Obtener;
+import certificacion.utilities.TokenManager;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import io.cucumber.datatable.DataTable;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.rest.SerenityRest;
@@ -13,8 +16,7 @@ import net.serenitybdd.screenplay.rest.interactions.Post;
 
 import java.util.List;
 
-import static certificacion.enums.DatosGenerales.RESPONSE;
-import static certificacion.enums.DatosGenerales.RUTA_BODY_INICIO;
+import static certificacion.enums.DatosGenerales.*;
 import static certificacion.utilities.ObtenerLogger.mensaje;
 
 public class IniciarSesion implements Task {
@@ -39,7 +41,12 @@ public class IniciarSesion implements Task {
                                 .yLosValores(body, action)).relaxedHTTPSValidation()));
         Serenity.setSessionVariable(RESPONSE.getMsj()).to(SerenityRest.lastResponse().body());
         mensaje().info(RESPONSE.getMsj());
-        SerenityRest.lastResponse().body().prettyPrint();
+        String jsonResponse = SerenityRest.lastResponse().body().prettyPrint();
+        JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
+        String token = jsonObject.get(TOKEN.getMsj()).getAsString();
+        Serenity.setSessionVariable(TOKEN.getMsj()).to(token);
+        TokenManager.setAuthToken(token);
+
     }
 
     public static IniciarSesion conLosDatos(DataTable body, String endPoint) {

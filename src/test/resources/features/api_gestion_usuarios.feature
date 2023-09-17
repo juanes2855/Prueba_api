@@ -95,9 +95,52 @@ Característica: API de Autenticación
     Entonces el código de estado de respuesta debe ser 200
     Y la respuesta debe ser un objeto JSON
     Y el objeto JSON debe tener las propiedades:
-      | mensaje                          |
-      | Usuario actualizado exitosamente |
+      | message | <message> |
+
 
     Ejemplos:
-      | user_id | username | password | email               |
-      | 21      | hectorL  | P@ssw0rd | hectorl@example.com |
+      | user_id | username | password | email               | message                          |
+      | 21      | hectorL  | 1        | hectorl@example.com | Usuario actualizado exitosamente |
+
+  @ServiciosRest
+  Esquema del escenario: Cambiar Contraseña exitosamente
+    Dado me conecto a la api
+    Cuando envío una solicitud PATCH a "cambio" <user_id> con JSON:
+      | new_password | <new_password> |
+
+    Entonces el código de estado de respuesta debe ser 200
+    Y la respuesta debe ser un objeto JSON
+    Y el objeto JSON debe tener las propiedades:
+      | message | <message> |
+
+
+    Ejemplos:
+      | user_id | new_password | message                             |
+      | 21      | nueva        | Contraseña actualizada exitosamente |
+
+  @ServiciosRest
+  Esquema del escenario: Eliminar Usuario exitosamente
+    Dado me conecto a la api
+    Cuando envío una solicitud DELETE a "eliminar" <user_id> con JSON
+    Entonces el código de estado de respuesta debe ser 200
+    Y la respuesta debe ser un objeto JSON
+    Y el objeto JSON debe tener las propiedades:
+      | message | <message> |
+
+    Ejemplos:
+      | user_id | message                        |
+      | 21      | Usuario eliminado exitosamente |
+
+
+  Esquema del escenario: Solicitud de recuperación de contraseña exitosamente
+    Dado me conecto a la api
+    Cuando envío una solicitud POST a "/emails" con JSON:
+      | username | <username> |
+    Entonces el código de estado de respuesta debe ser 200
+    Y la respuesta debe ser un objeto JSON
+    Y el objeto JSON debe tener las propiedades:
+      | message | <message> |
+
+    Ejemplos:
+      | username | message                                         |
+      | hectorL  | Solicitud de recuperación de contraseña exitosa |

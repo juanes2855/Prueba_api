@@ -5,7 +5,8 @@ public enum ConfiguracionAmbiente {
 
     BASE_URL("http://localhost:8080"),
     CONTENT_TYPE("Content-Type"),
-    CONTENT_TYPE_JSON("application/json");
+    CONTENT_TYPE_JSON("application/json"),
+    AUTHORIZATION("Authorization");
     String msj;
     ConfiguracionAmbiente(String msj) {
         this.msj = msj;

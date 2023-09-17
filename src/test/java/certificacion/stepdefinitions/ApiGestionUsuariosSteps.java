@@ -4,10 +4,8 @@ import certificacion.enums.EndPoint;
 import certificacion.exceptions.ExcepcionGeneral;
 import certificacion.models.Usuario;
 import certificacion.questions.ObtenerRespuesta;
-import certificacion.tasks.ConsultarUsuario;
-import certificacion.tasks.CrearUsuario;
-import certificacion.tasks.IniciarSesion;
-import certificacion.tasks.ListarUsuarios;
+import certificacion.tasks.*;
+import certificacion.utilities.TokenManager;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Dado;
@@ -29,8 +27,7 @@ import java.util.List;
 import java.util.Map;
 
 import static certificacion.enums.ConfiguracionAmbiente.BASE_URL;
-import static certificacion.enums.DatosGenerales.BODY;
-import static certificacion.enums.DatosGenerales.RESPONSE;
+import static certificacion.enums.DatosGenerales.*;
 import static certificacion.enums.Mensajes.*;
 import static net.serenitybdd.screenplay.actors.OnStage.theActorInTheSpotlight;
 
@@ -38,6 +35,8 @@ public class ApiGestionUsuariosSteps {
 
     private RequestSpecification request;
     private Response response;
+
+    private String token;
 
     @Dado("me conecto a la api")
     public void meConectoALaApi() {
@@ -131,5 +130,23 @@ public class ApiGestionUsuariosSteps {
 
     @Cuando("envío una solicitud PUT a {string} {} con JSON:")
     public void envioUnaSolicitudPUTAConJSON(String endPoint, String user_id , DataTable body) {
+       token = TokenManager.getAuthToken();
+       theActorInTheSpotlight().attemptsTo(ActualizarUsuario.conLosDatos(body,endPoint, user_id, token));
+    }
+
+    @Cuando("envío una solicitud PATCH a {string} {} con JSON:")
+    public void envíoUnaSolicitudPATCHAConJSON(String endPoint, String user_id , DataTable body) {
+        token = TokenManager.getAuthToken();
+        theActorInTheSpotlight().attemptsTo(CambiarPassword.conLosDatos(body,endPoint,user_id, token));
+    }
+
+    @Cuando("envío una solicitud DELETE a {string} {} con JSON")
+    public void envíoUnaSolicitudDELETEAUser_idConJSON(String endPoint, String user_id ) {
+        token = TokenManager.getAuthToken();
+        theActorInTheSpotlight().attemptsTo(EliminarUsuario.conLosDatos(endPoint,user_id, token));
+    }
+
+    @Cuando("envío una solicitud POST a {string} <username> con JSON:")
+    public void envíoUnaSolicitudPOSTAUsernameConJSON(String endPoint, DataTable body) {
     }
 }

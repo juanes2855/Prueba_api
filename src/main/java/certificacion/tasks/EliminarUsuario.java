@@ -1,31 +1,24 @@
 package certificacion.tasks;
 
 import certificacion.enums.EndPoint;
-import certificacion.utilities.CrearBody;
 import certificacion.utilities.Obtener;
-import io.cucumber.datatable.DataTable;
 import net.serenitybdd.core.Serenity;
 import net.serenitybdd.rest.SerenityRest;
 import net.serenitybdd.screenplay.Actor;
 import net.serenitybdd.screenplay.Task;
 import net.serenitybdd.screenplay.Tasks;
-import net.serenitybdd.screenplay.rest.interactions.Put;
+import net.serenitybdd.screenplay.rest.interactions.Delete;
 
-import java.util.List;
-
-import static certificacion.enums.DatosGenerales.*;
 import static certificacion.enums.DatosGenerales.RESPONSE;
 import static certificacion.utilities.ObtenerLogger.mensaje;
 
-public class ActualizarUsuario implements Task {
+public class EliminarUsuario implements Task {
 
-    List<String> body;
     String endPoint;
     String user_id;
     String token;
 
-    public ActualizarUsuario(DataTable body, String endPoint, String user_id, String token) {
-        this.body = body.asList();
+    public EliminarUsuario(String endPoint, String user_id, String token) {
         this.endPoint = endPoint;
         this.user_id = user_id;
         this.token = token;
@@ -35,16 +28,14 @@ public class ActualizarUsuario implements Task {
     public <T extends Actor> void performAs(T actor) {
         endPoint = EndPoint.obtenerUri(endPoint);
         endPoint = endPoint + user_id;
-        actor.attemptsTo(Put.to(endPoint)
-                .with(requestSpecification -> requestSpecification.headers(Obtener.valorCabeceraAuth(token))
-                        .body(CrearBody.conLaPlantilla(RUTA_BODY_ACTUALIZAR.getMsj())
-                                .yLosValoresActualizar(body)).relaxedHTTPSValidation()));
+        actor.attemptsTo(Delete.from(endPoint)
+                .with(requestSpecification -> requestSpecification.headers(Obtener.valorCabeceraAuth(token)).relaxedHTTPSValidation()));
         Serenity.setSessionVariable(RESPONSE.getMsj()).to(SerenityRest.lastResponse().body());
         mensaje().info(RESPONSE.getMsj());
         SerenityRest.lastResponse().body().prettyPrint();
     }
 
-    public static ActualizarUsuario conLosDatos(DataTable body, String endPoint , String user_id, String token){
-        return Tasks.instrumented(ActualizarUsuario.class, body,endPoint,user_id, token);
+    public static EliminarUsuario conLosDatos(String endPoint , String user_id, String token){
+        return Tasks.instrumented(EliminarUsuario.class, endPoint,user_id, token);
     }
 }

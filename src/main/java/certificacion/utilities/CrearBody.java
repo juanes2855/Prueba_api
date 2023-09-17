@@ -41,6 +41,22 @@ public class CrearBody<Int> {
         mensaje().log(Level.INFO, REQUEST_BODY.getMsj(), nuevaPlantilla);
         return nuevaPlantilla;
     }
+
+    public String yLosValoresActualizar(List<String> values) {
+        String nuevaPlantilla = parseJson(plantillaRuta);
+        nuevaPlantilla = nuevaPlantilla.replace(EMAIL.getMsj(), values.get(5));
+        nuevaPlantilla = nuevaPlantilla.replace(PASSWORD.getMsj(), values.get(3));
+        nuevaPlantilla = nuevaPlantilla.replace(USERNAME.getMsj(),values.get(1));
+        mensaje().log(Level.INFO, REQUEST_BODY.getMsj(), nuevaPlantilla);
+        return nuevaPlantilla;
+    }
+
+    public String yLosValoresCambiarPassword(List<String> values) {
+        String nuevaPlantilla = parseJson(plantillaRuta);
+        nuevaPlantilla = nuevaPlantilla.replace(NEW_PASSWORD.getMsj(), values.get(1));;
+        mensaje().log(Level.INFO, REQUEST_BODY.getMsj(), nuevaPlantilla);
+        return nuevaPlantilla;
+    }
     private String parseJson(String ruta) {
         String resultStr = "";
         resultStr = readFileAsString(ruta);
