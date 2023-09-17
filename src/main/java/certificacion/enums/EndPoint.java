@@ -10,7 +10,9 @@ public enum EndPoint {
     ACTUALIZAR_USUARIO("actualizar","/users/"),
     CAMBIAR_PASSWORD("cambio","/users/"),
     ELIMINAR_USUARIO("eliminar","/users/"),
+    ENVIAR_EMAIL("emails","/emails"),
     INICIAR_SESION("iniciar", "/tokens");
+
     private final String llave;
     private final String valor;
     private static Map<String, String> uri;

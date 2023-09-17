@@ -12,4 +12,6 @@ public class CargaDeModelos {
     public Usuario UsuarioEntry(Map<String,String> entry){
         return new Usuario(Integer.parseInt(entry.get(USER_ID_VALOR.getMsj())),entry.get(EMAIL_VALOR.getMsj()),entry.get(USERNAME_VALOR.getMsj()), entry.get(PASSWORD_VALOR.getMsj()));
     }
+
+
 }

@@ -45,8 +45,12 @@ public class ApiGestionUsuariosSteps {
 
     @Cuando("envío una solicitud POST a {string} con JSON:")
     public void envioUnaSolicitudPOSTAConJSON(String endPoint, List<Usuario> body) {
+        if (endPoint.equals(CREAR.getMsj())){
+            theActorInTheSpotlight().attemptsTo(CrearUsuario.conLosDatos(body, endPoint));
+        }else if (endPoint.equals(EMAILS.getMsj())){
+           // theActorInTheSpotlight().attemptsTo(EnviarEmails.conLosDatos(body, endPoint));
+        }
 
-        theActorInTheSpotlight().attemptsTo(CrearUsuario.conLosDatos(body, endPoint));
     }
 
     @Entonces("el código de estado de respuesta debe ser {int}")
@@ -146,7 +150,8 @@ public class ApiGestionUsuariosSteps {
         theActorInTheSpotlight().attemptsTo(EliminarUsuario.conLosDatos(endPoint,user_id, token));
     }
 
-    @Cuando("envío una solicitud POST a {string} <username> con JSON:")
-    public void envíoUnaSolicitudPOSTAUsernameConJSON(String endPoint, DataTable body) {
+    @Cuando("envío una solicitud POST a envio de {string} con JSON:")
+    public void envíoUnaSolicitudPOSTAEnvioDeConJSON(String endPoint, DataTable body) {
+        theActorInTheSpotlight().attemptsTo(EnviarEmails.conLosDatos(body, endPoint));
     }
 }

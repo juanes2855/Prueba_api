@@ -11,6 +11,7 @@ public enum DatosGenerales {
     RUTA_BODY_REGISTRO("src/test/resources/Data/registro.json"),
     RUTA_BODY_INICIO("src/test/resources/Data/inicioSesion.json"),
     RUTA_BODY_ACTUALIZAR("src/test/resources/Data/actualizar.json"),
+    RUTA_BODY_ENVIAR_EMAIL("src/test/resources/Data/envioEmail.json"),
     RUTA_BODY_CAMBIAR_PASSWORD("src/test/resources/Data/cambiarContrasenia.json"),
     TRANSACTION_ID("\\$\\{" + "transactionId" + "}"),
     TRANSACTION_ID_VALOR("transactionId"),
@@ -29,6 +30,8 @@ public enum DatosGenerales {
     FORMATO_FECHA_HORA("HHmmssS"),
     REQUEST_BODY("\"Request body: {0} \"\n"),
     RESPONSE("Response "),
+    CREAR("crear"),
+    EMAILS("emails"),
     TOKEN("token");
     String msj;
     DatosGenerales(String msj) {

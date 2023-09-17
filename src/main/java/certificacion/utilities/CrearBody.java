@@ -57,6 +57,13 @@ public class CrearBody<Int> {
         mensaje().log(Level.INFO, REQUEST_BODY.getMsj(), nuevaPlantilla);
         return nuevaPlantilla;
     }
+
+    public String yLosValoresEnviarEmail(List<String> values) {
+        String nuevaPlantilla = parseJson(plantillaRuta);
+        nuevaPlantilla = nuevaPlantilla.replace(USERNAME.getMsj(), values.get(1));;
+        mensaje().log(Level.INFO, REQUEST_BODY.getMsj(), nuevaPlantilla);
+        return nuevaPlantilla;
+    }
     private String parseJson(String ruta) {
         String resultStr = "";
         resultStr = readFileAsString(ruta);

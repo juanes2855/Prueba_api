@@ -99,8 +99,23 @@ Característica: API de Autenticación
 
 
     Ejemplos:
-      | user_id | username | password | email               | message                          |
-      | 21      | hectorL  | 1        | hectorl@example.com | Usuario actualizado exitosamente |
+      | user_id | username | password | email                 | message                          |
+      | 21      | hectorL  | 1        | juanes13916@gmail.com | Usuario actualizado exitosamente |
+
+  @ServiciosRest
+  Esquema del escenario: Solicitud de recuperación de contraseña exitosamente
+    Dado me conecto a la api
+    Cuando envío una solicitud POST a envio de "emails" con JSON:
+      | username | <username> |
+    Entonces el código de estado de respuesta debe ser 200
+    Y la respuesta debe ser un objeto JSON
+    Y el objeto JSON debe tener las propiedades:
+      | message | <message> |
+
+    Ejemplos:
+      | username | message                                                                |
+      | hectorL  | Correo electrónico de recuperación de contraseña enviado correctamente |
+
 
   @ServiciosRest
   Esquema del escenario: Cambiar Contraseña exitosamente
@@ -131,16 +146,3 @@ Característica: API de Autenticación
       | user_id | message                        |
       | 21      | Usuario eliminado exitosamente |
 
-
-  Esquema del escenario: Solicitud de recuperación de contraseña exitosamente
-    Dado me conecto a la api
-    Cuando envío una solicitud POST a "/emails" con JSON:
-      | username | <username> |
-    Entonces el código de estado de respuesta debe ser 200
-    Y la respuesta debe ser un objeto JSON
-    Y el objeto JSON debe tener las propiedades:
-      | message | <message> |
-
-    Ejemplos:
-      | username | message                                         |
-      | hectorL  | Solicitud de recuperación de contraseña exitosa |
