@@ -14,15 +14,15 @@ Característica: API de Autenticación
       | user_id   | username   | password   | email   |
       | <user_id> | <username> | <password> | <email> |
 
-    Entonces el código de estado de respuesta debe ser 201
-
+    Entonces el código de estado de respuesta debe ser <statusCode>
     Y la respuesta debe ser un objeto JSON
-
-    Y valida que el mensaje de error sea "Usuario registrado exitosamente"
+    Y el objeto JSON debe tener las propiedades:
+      | <messagekey> | <message> |
 
     Ejemplos:
-      | user_id | username | password | email               |
-      | 21      | hectorL  | P@ssw0rd | hectorl@example.com |
+      | user_id | username | password | email               | statusCode | message                         | messagekey |
+      | 21      | hectorL  | P@ssw0rd | hectorl@example.com | 201        | Usuario registrado exitosamente | message    |
+      | 21      | hectorL  | P@ssw0rd | hectorl@example.com | 409        | El usuario ya existe            | error      |
 
   @ServiciosRest
   Esquema del escenario: Obtener los detalles de un usuario  por user_id exitosamente
@@ -31,7 +31,7 @@ Característica: API de Autenticación
 
     Cuando envío una solicitud GET a "consultar" <user_id>
 
-    Entonces el código de estado de respuesta debe ser 200
+    Entonces el código de estado de respuesta debe ser <statusCode>
 
     Y la respuesta debe ser un objeto JSON
 
@@ -40,8 +40,8 @@ Característica: API de Autenticación
       | username | <username> |
 
     Ejemplos:
-      | user_id | username |
-      | 21      | hectorL  |
+      | user_id | username | statusCode |
+      | 21      | hectorL  | 200        |
 
 
   @ServiciosRest
@@ -51,15 +51,15 @@ Característica: API de Autenticación
 
     Cuando envío una solicitud GET para "listar" "page=" <page> "&per_page=" <per_page>
 
-    Entonces el código de estado de respuesta debe ser 200
+    Entonces el código de estado de respuesta debe ser <statusCode>
 
     Y la respuesta debe ser un arreglo JSON
 
     Y el arreglo JSON debe tener al menos 1 elemento
 
     Ejemplos:
-      | page | per_page |
-      | 1    | 10       |
+      | page | per_page | statusCode |
+      | 1    | 10       | 200        |
 
 
   @ServiciosRest
@@ -71,15 +71,15 @@ Característica: API de Autenticación
       | username | <username> |
       | password | <password> |
 
-    Entonces el código de estado de respuesta debe ser 200
+    Entonces el código de estado de respuesta debe ser <statusCode>
 
     Y la respuesta debe ser un objeto JSON
 
     Y el JSON debe tener al menos un elemento
 
     Ejemplos:
-      | password | username | token  |
-      | P@ssw0rd | hectorL  | token1 |
+      | password | username | statusCode |
+      | P@ssw0rd | hectorL  | 200        |
 
 
   @ServiciosRest
@@ -92,29 +92,31 @@ Característica: API de Autenticación
       | password | <password> |
       | email    | <email>    |
 
-    Entonces el código de estado de respuesta debe ser 200
+    Entonces el código de estado de respuesta debe ser <statusCode>
     Y la respuesta debe ser un objeto JSON
     Y el objeto JSON debe tener las propiedades:
-      | message | <message> |
+      | <messagekey> | <message> |
 
 
     Ejemplos:
-      | user_id | username | password | email                 | message                          |
-      | 21      | hectorL  | 1        | juanes13916@gmail.com | Usuario actualizado exitosamente |
+      | user_id | username | password | email                 | message                                     | statusCode | messagekey |
+      | 21      | hectorL  | 1        | juanes13916@gmail.com | Usuario actualizado exitosamente            | 200        | message    |
+      | 53      | hectorL  | 1        | juanes13916@gmail.com | No tienes permiso para realizar esta acción | 403        | error      |
 
   @ServiciosRest
   Esquema del escenario: Solicitud de recuperación de contraseña exitosamente
     Dado me conecto a la api
     Cuando envío una solicitud POST a envio de "emails" con JSON:
       | username | <username> |
-    Entonces el código de estado de respuesta debe ser 200
+    Entonces el código de estado de respuesta debe ser <statusCode>
     Y la respuesta debe ser un objeto JSON
     Y el objeto JSON debe tener las propiedades:
-      | message | <message> |
+      | <messagekey> | <message> |
 
     Ejemplos:
-      | username | message                                                                |
-      | hectorL  | Correo electrónico de recuperación de contraseña enviado correctamente |
+      | username   | message                                                                | statusCode | messagekey |
+      | hectorL    | Correo electrónico de recuperación de contraseña enviado correctamente | 200        | message    |
+      | hectorLavo | Usuario no encontrado                                                  | 404        | error      |
 
 
   @ServiciosRest
@@ -123,26 +125,28 @@ Característica: API de Autenticación
     Cuando envío una solicitud PATCH a "cambio" <user_id> con JSON:
       | new_password | <new_password> |
 
-    Entonces el código de estado de respuesta debe ser 200
+    Entonces el código de estado de respuesta debe ser <statusCode>
     Y la respuesta debe ser un objeto JSON
     Y el objeto JSON debe tener las propiedades:
-      | message | <message> |
+      | <messagekey> | <message> |
 
 
     Ejemplos:
-      | user_id | new_password | message                             |
-      | 21      | nueva        | Contraseña actualizada exitosamente |
+      | user_id | new_password | message                                     | statusCode | messagekey |
+      | 21      | nueva        | Contraseña actualizada exitosamente         | 200        | message    |
+      | 11      | nueva        | No tienes permiso para realizar esta acción | 403        | error      |
 
   @ServiciosRest
   Esquema del escenario: Eliminar Usuario exitosamente
     Dado me conecto a la api
     Cuando envío una solicitud DELETE a "eliminar" <user_id> con JSON
-    Entonces el código de estado de respuesta debe ser 200
+    Entonces el código de estado de respuesta debe ser <statusCode>
     Y la respuesta debe ser un objeto JSON
     Y el objeto JSON debe tener las propiedades:
-      | message | <message> |
+      | <messagekey> | <message> |
 
     Ejemplos:
-      | user_id | message                        |
-      | 21      | Usuario eliminado exitosamente |
+      | user_id | message                                     | statusCode | messagekey |
+      | 21      | Usuario eliminado exitosamente              | 200        | message    |
+      | 11      | No tienes permiso para realizar esta acción | 403        | error      |
 
