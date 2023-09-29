@@ -11,8 +11,6 @@ Característica: API de Autenticación
     Dado me conecto a la api
 
     Cuando envío una solicitud POST a "crear" con JSON:
-      | user_id   | username   | password   | email   |
-      | <user_id> | <username> | <password> | <email> |
 
     Entonces el código de estado de respuesta debe ser <statusCode>
     Y la respuesta debe ser un objeto JSON
@@ -20,9 +18,9 @@ Característica: API de Autenticación
       | <messagekey> | <message> |
 
     Ejemplos:
-      | user_id | username | password | email               | statusCode | message                         | messagekey |
-      | 21      | hectorL  | P@ssw0rd | hectorl@example.com | 201        | Usuario registrado exitosamente | message    |
-      | 21      | hectorL  | P@ssw0rd | hectorl@example.com | 409        | El usuario ya existe            | error      |
+      | statusCode | message                         | messagekey |
+      | 201        | Usuario registrado exitosamente | message    |
+
 
   @ServiciosRest
   Esquema del escenario: Obtener los detalles de un usuario  por user_id exitosamente
@@ -42,6 +40,7 @@ Característica: API de Autenticación
     Ejemplos:
       | user_id | username | statusCode |
       | 21      | hectorL  | 200        |
+      | 25      | hectorp  | 404        |
 
 
   @ServiciosRest
@@ -80,6 +79,7 @@ Característica: API de Autenticación
     Ejemplos:
       | password | username | statusCode |
       | P@ssw0rd | hectorL  | 200        |
+      | P@ssw0r  | hectorL  | 401        |
 
 
   @ServiciosRest

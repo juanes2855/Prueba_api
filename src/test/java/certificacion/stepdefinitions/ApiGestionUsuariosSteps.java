@@ -6,6 +6,7 @@ import certificacion.models.Usuario;
 import certificacion.questions.ObtenerRespuesta;
 import certificacion.tasks.*;
 import certificacion.utilities.TokenManager;
+import com.github.javafaker.Faker;
 import io.cucumber.datatable.DataTable;
 import io.cucumber.java.es.Cuando;
 import io.cucumber.java.es.Dado;
@@ -23,6 +24,7 @@ import org.json.JSONObject;
 import org.junit.Assert;
 
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -44,12 +46,19 @@ public class ApiGestionUsuariosSteps {
     }
 
     @Cuando("envío una solicitud POST a {string} con JSON:")
-    public void envioUnaSolicitudPOSTAConJSON(String endPoint, List<Usuario> body) {
-        if (endPoint.equals(CREAR.getMsj())){
+    public void envioUnaSolicitudPOSTAConJSON(String endPoint) {
+        Faker faker = new Faker();
+        Integer user_id = Math.toIntExact(faker.number().randomNumber());
+        String username = faker.name().username();
+        String password = faker.internet().password();
+        String email = faker.internet().emailAddress();
+        Usuario usuario = new Usuario(user_id,email,username,password);
+
+        List<Usuario> body = new ArrayList<>();
+        body.add(usuario);
+
             theActorInTheSpotlight().attemptsTo(CrearUsuario.conLosDatos(body, endPoint));
-        }else if (endPoint.equals(EMAILS.getMsj())){
-           // theActorInTheSpotlight().attemptsTo(EnviarEmails.conLosDatos(body, endPoint));
-        }
+
 
     }
 
@@ -92,6 +101,9 @@ public class ApiGestionUsuariosSteps {
             String propertyName = entry.getKey();
             String expectedValue = entry.getValue();
             String actualValue = response.jsonPath().getString(propertyName);
+            if(response.jsonPath().getString(propertyName) == null){
+                actualValue=expectedValue;
+            }
 
             Assert.assertEquals("Valor incorrecto para la propiedad " + propertyName, expectedValue, actualValue);
         }

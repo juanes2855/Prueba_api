@@ -33,6 +33,7 @@ public class IniciarSesion implements Task {
 
     @Override
     public <T extends Actor> void performAs(T actor) {
+        String token = "";
         action = endPoint;
         endPoint = EndPoint.obtenerUri(endPoint);
         actor.attemptsTo(Post.to(endPoint)
@@ -42,10 +43,13 @@ public class IniciarSesion implements Task {
         Serenity.setSessionVariable(RESPONSE.getMsj()).to(SerenityRest.lastResponse().body());
         mensaje().info(RESPONSE.getMsj());
         String jsonResponse = SerenityRest.lastResponse().body().prettyPrint();
-        JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
-        String token = jsonObject.get(TOKEN.getMsj()).getAsString();
-        Serenity.setSessionVariable(TOKEN.getMsj()).to(token);
-        TokenManager.setAuthToken(token);
+        if(SerenityRest.lastResponse().getStatusCode() == 200){
+            JsonObject jsonObject = JsonParser.parseString(jsonResponse).getAsJsonObject();
+            token = jsonObject.get(TOKEN.getMsj()).getAsString();
+            Serenity.setSessionVariable(TOKEN.getMsj()).to(token);
+            TokenManager.setAuthToken(token);
+        }
+
 
     }
 
