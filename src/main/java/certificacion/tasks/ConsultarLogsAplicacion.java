@@ -11,38 +11,31 @@ import net.serenitybdd.screenplay.rest.interactions.Get;
 import static certificacion.enums.DatosGenerales.RESPONSE;
 import static certificacion.utilities.ObtenerLogger.mensaje;
 
-public class ListarUsuarios implements Task {
-
+public class ConsultarLogsAplicacion implements Task {
 
     String endPoint;
-    String page;
-    Integer pageValue;
-    String perPage;
-    Integer perPageValue;
+    String aplication;
 
-    public ListarUsuarios(String endPoint, String page, Integer pageValue, String perPage, Integer perPageValue) {
+    public ConsultarLogsAplicacion(String endPoint, String aplication) {
         this.endPoint = endPoint;
-        this.page = page;
-        this.pageValue = pageValue;
-        this.perPage = perPage;
-        this.perPageValue = perPageValue;
+        this.aplication = aplication;
     }
 
     @Override
     public <T extends Actor> void performAs(T actor) {
         endPoint = EndPoint.obtenerUri(endPoint);
-        endPoint = endPoint + page + pageValue + perPage + perPageValue;
-        System.out.println(endPoint);
-        actor.attemptsTo(Get.resource(endPoint));
+        System.out.println("---------------------------"+endPoint);
+        endPoint= endPoint+aplication;
+        System.out.println("---------------------------"+endPoint);
+
+        actor.attemptsTo(Get.resource(endPoint).with(requestSpecification -> requestSpecification.param("application")));
 
         Serenity.setSessionVariable(RESPONSE.getMsj()).to(SerenityRest.lastResponse().body());
         mensaje().info(RESPONSE.getMsj());
         SerenityRest.lastResponse().body().prettyPrint();
-
     }
 
-    public static ListarUsuarios conLosDatos(String endPoint, String page, Integer pageValue, String perPage, Integer perPageValue) {
-        return Tasks.instrumented(ListarUsuarios.class, endPoint, page, pageValue, perPage, perPageValue);
+    public static ConsultarLogsAplicacion conLosDatos(String endPoint, String aplication){
+        return Tasks.instrumented(ConsultarLogsAplicacion.class,endPoint,aplication);
     }
-
 }

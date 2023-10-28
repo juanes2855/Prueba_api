@@ -3,7 +3,7 @@
 Característica: API de Autenticación
   Yo como estudiante de Microservicios
   Necesito automatizar el servicio ApiGestionUsuarios
-  Para tener realizar pruebas a sus EndPoints
+  Para realizar pruebas a sus EndPoints
 
   @ServiciosRest
   Esquema del escenario: Crear un nuevo usuario exitosamente
@@ -78,7 +78,7 @@ Característica: API de Autenticación
 
     Ejemplos:
       | password | username | statusCode |
-      | P@ssw0rd | hectorL  | 200        |
+      | string   | hectorL  | 200        |
       | P@ssw0r  | hectorL  | 401        |
 
 

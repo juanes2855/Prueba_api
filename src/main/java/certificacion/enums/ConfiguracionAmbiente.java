@@ -4,6 +4,7 @@ package certificacion.enums;
 public enum ConfiguracionAmbiente {
 
     BASE_URL("http://localhost:8080"),
+    BASE_URL_LOGS("http://localhost:8081"),
     CONTENT_TYPE("Content-Type"),
     CONTENT_TYPE_JSON("application/json"),
     AUTHORIZATION("Authorization");

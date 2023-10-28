@@ -1,0 +1,8 @@
+{
+  "application": "${application}",
+  "tipoLog": "${tipoLog}",
+  "modulo": "${modulo}",
+  "fechaHoraGeneracion": "${fechaHoraGeneracion}",
+  "resumen": "${resumen}",
+  "descripcion": "${descripcion}"
+}

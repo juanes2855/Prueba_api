@@ -11,38 +11,26 @@ import net.serenitybdd.screenplay.rest.interactions.Get;
 import static certificacion.enums.DatosGenerales.RESPONSE;
 import static certificacion.utilities.ObtenerLogger.mensaje;
 
-public class ListarUsuarios implements Task {
-
+public class ListarLogs implements Task {
 
     String endPoint;
-    String page;
-    Integer pageValue;
-    String perPage;
-    Integer perPageValue;
 
-    public ListarUsuarios(String endPoint, String page, Integer pageValue, String perPage, Integer perPageValue) {
+    public ListarLogs(String endPoint) {
         this.endPoint = endPoint;
-        this.page = page;
-        this.pageValue = pageValue;
-        this.perPage = perPage;
-        this.perPageValue = perPageValue;
     }
 
     @Override
     public <T extends Actor> void performAs(T actor) {
         endPoint = EndPoint.obtenerUri(endPoint);
-        endPoint = endPoint + page + pageValue + perPage + perPageValue;
-        System.out.println(endPoint);
+
         actor.attemptsTo(Get.resource(endPoint));
 
         Serenity.setSessionVariable(RESPONSE.getMsj()).to(SerenityRest.lastResponse().body());
         mensaje().info(RESPONSE.getMsj());
         SerenityRest.lastResponse().body().prettyPrint();
-
     }
 
-    public static ListarUsuarios conLosDatos(String endPoint, String page, Integer pageValue, String perPage, Integer perPageValue) {
-        return Tasks.instrumented(ListarUsuarios.class, endPoint, page, pageValue, perPage, perPageValue);
+    public static ListarLogs conLosDatos(String endPoint){
+        return Tasks.instrumented(ListarLogs.class,endPoint);
     }
-
 }
