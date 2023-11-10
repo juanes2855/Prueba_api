@@ -24,9 +24,7 @@ public class ConsultarLogsAplicacion implements Task {
     @Override
     public <T extends Actor> void performAs(T actor) {
         endPoint = EndPoint.obtenerUri(endPoint);
-        System.out.println("---------------------------"+endPoint);
         endPoint= endPoint+aplication;
-        System.out.println("---------------------------"+endPoint);
 
         actor.attemptsTo(Get.resource(endPoint).with(requestSpecification -> requestSpecification.param("application")));
 
