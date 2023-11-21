@@ -9,6 +9,7 @@ public enum EndPoint {
     CREAR_LOG("crearlog", "/logs"),
     LISTAR_LOG("listarLogs", "/logs"),
     CONSULTAR_USUARIO("consultar", "/users/"),
+    CONSULTAR_PERFIL("consultarPerfil", "/profile/"),
     CONSULTAR_LOS_APLICACION("consultarLogs", "/logs/%7Bapplication%7D?application="),
     LISTAR_USUARIOS("listar", "/users?"),
     ACTUALIZAR_USUARIO("actualizar", "/users/"),

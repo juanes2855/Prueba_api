@@ -35,9 +35,7 @@ public class IniciarSesion implements Task {
     public <T extends Actor> void performAs(T actor) {
         String token = "";
         action = endPoint;
-        System.out.println(endPoint+"-----------------------------------------222222222222");
         endPoint = EndPoint.obtenerUri(endPoint);
-        System.out.println(endPoint+"-----------------------------------------");
         actor.attemptsTo(Post.to(endPoint)
                 .with(requestSpecification -> requestSpecification.headers(Obtener.valorCabecera())
                         .body(CrearBody.conLaPlantilla(RUTA_BODY_INICIO.getMsj())

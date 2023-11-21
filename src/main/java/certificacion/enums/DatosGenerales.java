@@ -12,6 +12,7 @@ public enum DatosGenerales {
     RUTA_BODY_CREAR_LOG("src/test/resources/Data/crearLog.json"),
     RUTA_BODY_INICIO("src/test/resources/Data/inicioSesion.json"),
     RUTA_BODY_ACTUALIZAR("src/test/resources/Data/actualizar.json"),
+    RUTA_BODY_ACTUALIZAR_CON_PERFIL("src/test/resources/Data/actualizarConPerfil.json"),
     RUTA_BODY_ENVIAR_EMAIL("src/test/resources/Data/envioEmail.json"),
     RUTA_BODY_CAMBIAR_PASSWORD("src/test/resources/Data/cambiarContrasenia.json"),
     TRANSACTION_ID("\\$\\{" + "transactionId" + "}"),
@@ -20,6 +21,12 @@ public enum DatosGenerales {
     EMAIL("${email}"),
     PASSWORD("${password}"),
     USERNAME("${username}"),
+    IS_CONTACT_INFO_PUBLIC("${isContactInfoPublic}"),
+    CORRESPONDENCE_ADDRESS("${correspondenceAddress}"),
+    BIO("${bio}"),
+    ORGANIZATION("${organization}"),
+    COUNTRY("${country}"),
+    FACEBOOK_LINK("${faceBookLink}"),
     NEW_PASSWORD("${new_password}"),
     EMAIL_VALOR("email"),
     PASSWORD_VALOR("password"),
@@ -39,7 +46,7 @@ public enum DatosGenerales {
     RESPONSE("Response "),
     CREAR("crear"),
     EMAILS("emails"),
-    TOKEN("token");
+    TOKEN("message");
     String msj;
     DatosGenerales(String msj) {
         this.msj = msj;
