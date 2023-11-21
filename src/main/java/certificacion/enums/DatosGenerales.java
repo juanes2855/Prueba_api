@@ -10,6 +10,7 @@ public enum DatosGenerales {
     IDENTIFICATION_NUMBER("identificationNumber"),
     RUTA_BODY_REGISTRO("src/test/resources/Data/registro.json"),
     RUTA_BODY_CREAR_LOG("src/test/resources/Data/crearLog.json"),
+    RUTA_BODY_CREAR_PERFIL("src/test/resources/Data/crearPerfil.json"),
     RUTA_BODY_INICIO("src/test/resources/Data/inicioSesion.json"),
     RUTA_BODY_ACTUALIZAR("src/test/resources/Data/actualizar.json"),
     RUTA_BODY_ACTUALIZAR_CON_PERFIL("src/test/resources/Data/actualizarConPerfil.json"),

@@ -1,0 +1,9 @@
+{
+  "username": "${username}",
+  "isContactInfoPublic": "${isContactInfoPublic}",
+  "correspondenceAddress":"${correspondenceAddress}",
+  "bio":"${bio}",
+  "organization":"${organization}",
+  "country":"${country}",
+  "faceBookLink": "${faceBookLink}"
+}
